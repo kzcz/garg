@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	if(!pwd){perror("getpwuid");return 1;}
 	char *owner=pwd->pw_name;
 	grp=getgrgid(res.st_gid);
-	if(!pwd){perror("getgrguid");return 1;}
+	if(!grp){perror("getgrguid");return 1;}
 	char *group=grp->gr_name;
 	printf("File: %s\nOwner: %s (UID: %d)\nGroup: %s (GID: %d)\n",fname,owner,res.st_uid,group,res.st_gid);
 	return 0;
