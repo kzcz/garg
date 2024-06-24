@@ -56,7 +56,6 @@ void parse_arg(PACtx *ctx,int tp,char* par,void *ret){
 			}
 			stat(par,&j);
 			int q=tp&3;
-			if(par[strlen(par)-1]=='/'){par[strlen(par)-1]=0;}
 			if((q==xs_path_fzdir)&&(!S_ISDIR(j.st_mode))){
 				__err("\"%s\" expected a directory but got a file instead.",ctx->arg);
 			}
@@ -117,13 +116,13 @@ int nextarg(ArgCtx* ctx,void *ret){
 				case p_nopar: goto rt;
 				case p_reqpar: {
 					if(ha){__err("Missing parameter for \"%s\".",--arg);}
-					goto tmp;
+					goto parse;
 					}
 				case p_optpar: {
 					if(ha){*(int *)ret=0;return i;}
-					goto tmp;
+					goto parse;
 					}
-				tmp: {
+				parse: {
 						PACtx pax={ctx->argv,cur.arg};
 						parse_arg(&pax,cur.tp,ctx->argv[ctx->idx],ret);
 						ctx->idx++;
