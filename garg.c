@@ -95,6 +95,7 @@ int initctx(ArgCtx* ctx,Arg *args,int argc,char *argv[]){
 	ctx->argc=(short)argc;
 	ctx->argv=argv;
 	if(!args){return 1;}
+	__check_args(args);
 	__calc_lens(args);
 	ctx->args=args;
 	return 0;
